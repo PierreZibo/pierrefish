@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Coders Matter!</title>
+    
+    <link rel="stylesheet" href="style.css" />
+
+    <style type="text/css">
+        * { font-family: Arial, sans-serif; }
+ h1, p {
+      color: white;
+    }
+
+        html, body { min-height:100%; min-width:100%; }
+        body { background:#000; }
+        #box { padding:20px; margin:30px auto; max-width:70%; border:1px solid #ffffff; text-align:center; border-radius:10px; }
+        #fatBox { padding:30px; margin:30px auto; max-width:80%; border:2px solid #ffffff; text-align:center; border-radius:5px; }
+        a { color:#ACD4FF; }
+        p { margin-top:10px;text-align:center; border-radius:5px;color: white; }
+zibo { margin-top:10px;text-align:center; border-radius:5px;  }
+        .blue { background-color:rgba(0, 0, 0, 0.3); color:#fff; }
+        .red { background:#ff0000; color:#fff; }
+        .yellow { background:#FFCE50; color:#000; }
+        .whiteText { color:#fff; }
+        .blackText { color:#000; }
+        #ocra { background: #44A08D; background: -webkit-linear-gradient(to right, #093637, #44A08D); background: linear-gradient(to right, #093637, #44A08D); }
+.blue-button {
+      background-color: blue;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+    }
+body { font-family: Arial, sans-serif; }
+css
+复制
+h1 {
+  color: #333333;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input[type="number"], select {
+  width: 100px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+##currentDateTime, #earningsPerSecond, #workingTime {
+  margin-top: 30px;
+}
+#earnings {
+  margin-top: 60px;background:#ff0000 
+}
+
+
+    </style>
+</head>
+
+<body>
+
+    <div id="box" class="blue">
+        <h1>摸鱼时薪计算器</h1>
+        <p>该计算器旨在提醒你 <strong>时刻注意</strong>  <em style="color:#ff0000;">摸鱼时薪</em>, 避免超额过度劳累        
+        <p>输入基本信息后，工具将实时计算今日摸来的钱</p>
+    </div>
+
+</body>
+</html>
+
+</style> </head> <body> <h1></h1>
+<p>月薪多少？(单位：人民币)<p>
+<input type="number" id="monthlySalary" min="0" max="100000" value="10000"><br>
+
+<p>一个月工作多少天？(0-31之间的整数)<p>
+<input type="number" id="workingDays" min="0" max="31" value="21"><br>
+
+<p>几点上班？<p>
+<select id="startTime">
+<option value="6">9:00</option>
+<option value="6.5">9:30</option>
+<option value="11.5">10:00</option>
+<option value="12">10:30</option>
+</select><br>
+
+<p>几点下班？<p>
+<select id="endTime">
+<option value="14">18:00</option>
+<option value="14.5">18:30</option>
+<option value="23.5">19:00</option>
+<option value="24">19:30</option>
+<option value="24">20:00</option>
+<option value="24">20:30</option>
+<option value="24">21:00</option>
+<option value="24">21:30</option>
+<option value="24">22:00</option>
+<option value="24">22:30</option>
+
+</select><br>
+<br>
+<button class="blue-button" onclick="startCalculation()">立即计算</button>
+ <p id="earnings"></p > <p id="currentDateTime"></p > <p id="earningsPerSecond"></p > <p id="workingTime"></p > <script> var earningsDisplay = document.getElementById("earnings"); var currentDateTimeDisplay = document.getElementById("currentDateTime"); var earningsPerSecondDisplay = document.getElementById("earningsPerSecond"); var workingTimeDisplay = document.getElementById("workingTime"); var intervalId; function startCalculation() { clearInterval(intervalId); var monthlySalary = parseInt(document.getElementById("monthlySalary").value); var workingDays = parseInt(document.getElementById("workingDays").value); var startTime = parseFloat(document.getElementById("startTime").value); var endTime = parseFloat(document.getElementById("endTime").value); var workHours = endTime - startTime; var workSeconds = workHours * 60 * 60; var earningsPerSecond = monthlySalary / (workingDays * workSeconds); updateEarnings(); intervalId = setInterval(updateEarnings, 1000); function updateEarnings() { var currentTime = new Date(); var secondsWorked = (currentTime.getHours() * 60 * 60) + (currentTime.getMinutes() * 60) + currentTime.getSeconds() - (startTime * 60 * 60); var earnings = earningsPerSecond * secondsWorked; earningsDisplay.textContent = "今天截至目前摸了：" + earnings.toFixed(2) + "元"; currentDateTimeDisplay.textContent = "当前时间：" + currentTime.toLocaleString(); earningsPerSecondDisplay.textContent = "每秒的薪资：" + earningsPerSecond.toFixed(4) + "元"; workingTimeDisplay.textContent = "今日已工作时间（秒）：" + secondsWorked; } } </script> </body> </html>
